@@ -29,6 +29,7 @@ qt_add_qml_module(appGigaNotes
         SOURCES models/notesmodel.h models/notesmodel.cpp
         SOURCES entities/Note.h
         RESOURCES resources.qrc
+        RESOURCES README.md
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
