@@ -5,6 +5,8 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QDebug>
+#include <QVariant>
+#include "entities/Note.h"
 
 DatabaseManager& DatabaseManager::instance()
 {
@@ -75,4 +77,44 @@ bool DatabaseManager::createTables()
     }
 
     return true;
+}
+
+bool DatabaseManager::addNote(Note& note)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO notes (title, content) VALUES (:title, :content)");
+    query.bindValue(":title", note.title);
+    query.bindValue(":content", note.content);
+
+    if (query.exec()) {
+        note.id = query.lastInsertId().toInt();
+        return true;
+    }
+
+    qCritical() << "Failed to add note:" << query.lastError().text();
+    return false;
+}
+
+bool DatabaseManager::removeNote(int id)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM notes WHERE id = :id");
+    query.bindValue(":id", id);
+    return query.exec();
+}
+
+std::vector<Note> DatabaseManager::getAllNotes()
+{
+    std::vector<Note> notes;
+    QSqlQuery query("SELECT id, title, content, created_at FROM notes ORDER BY created_at DESC");
+
+    while (query.next()) {
+        Note note;
+        note.id = query.value(0).toInt();
+        note.title = query.value(1).toString();
+        note.content = query.value(2).toString();
+        note.createdAt = query.value(3).toDateTime().toString("yyyy-MM-dd HH:mm");
+        notes.push_back(note);
+    }
+    return notes;
 }

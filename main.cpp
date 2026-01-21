@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include "database/databasemanager.h"
+#include "models/notesmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +13,11 @@ int main(int argc, char *argv[])
     }
 
     QQmlApplicationEngine engine;
+
+    NotesModel notesModel;
+
+    engine.rootContext()->setContextProperty("notesModel", &notesModel);
+
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,

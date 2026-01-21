@@ -1,9 +1,11 @@
 #ifndef DATABASEMANAGER_H
 #define DATABASEMANAGER_H
 
+#include <vector>
 #include <QString>
 #include <QSqlDatabase>
 #include <memory>
+#include "entities/Note.h"
 
 /**
  * @brief Класс Singleton для управления подключением к базе данных SQLite.
@@ -30,6 +32,10 @@ public:
      */
     DatabaseManager(const DatabaseManager&) = delete;
     void operator=(const DatabaseManager&) = delete;
+
+    bool addNote(Note& note);
+    bool removeNote(int id);
+    std::vector<Note> getAllNotes();
 
 private:
     DatabaseManager();
