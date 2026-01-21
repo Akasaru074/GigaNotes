@@ -67,6 +67,27 @@ void NotesModel::removeNote(int index)
     }
 }
 
+void NotesModel::updateNote(int id, const QString &title, const QString &content)
+{
+    Note note;
+    note.id = id;
+    note.title = title;
+    note.content = content;
+
+    if (DatabaseManager::instance().updateNote(note)) {
+        for (int i = 0; i < m_notes.size(); ++i) {
+            if (m_notes[i].id == id) {
+                m_notes[i].title = title;
+                m_notes[i].content = content;
+
+                QModelIndex index = createIndex(i, 0);
+                emit dataChanged(index, index, {TitleRole, ContentRole});
+                break;
+            }
+        }
+    }
+}
+
 void NotesModel::loadNotes()
 {
     beginResetModel();

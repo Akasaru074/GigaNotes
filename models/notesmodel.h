@@ -26,7 +26,8 @@ public:
 
     // QML
     Q_INVOKABLE void addNote(const QString &title, const QString &content);
-    Q_INVOKABLE void removeNote(int index); // Удаляем по индексу в списке
+    Q_INVOKABLE void removeNote(int index);
+    Q_INVOKABLE void updateNote(int id, const QString &title, const QString &content);
 
 private:
     std::vector<Note> m_notes;

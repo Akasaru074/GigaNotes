@@ -58,6 +58,7 @@ Page {
 
             onClicked: {
                 stackView.push("NoteViewPage.qml", {
+                    noteId: model.id,
                     noteTitle: model.title,
                     noteContent: model.content,
                     noteDate: model.date

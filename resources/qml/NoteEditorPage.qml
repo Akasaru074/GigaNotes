@@ -4,7 +4,12 @@ import QtQuick.Layouts
 
 Page {
     id: root
-    title: qsTr("Новая заметка")
+
+    property int noteId: -1
+    property string initialTitle: ""
+    property string initialContent: ""
+
+    title: noteId === -1 ? qsTr("Новая заметка") : qsTr("Редактирование")
 
     header: ToolBar {
         RowLayout {
@@ -22,8 +27,12 @@ Page {
                 text: "Save"
                 enabled: titleField.text.length > 0
                 onClicked: {
-                    notesModel.addNote(titleField.text, contentArea.text)
-                    stackView.pop()
+                    if (root.noteId === -1) {
+                        notesModel.addNote(titleField.text, contentArea.text)
+                    } else {
+                        notesModel.updateNote(root.noteId, titleField.text, contentArea.text)
+                    }
+                    stackView.pop(null)
                 }
             }
         }
@@ -32,17 +41,16 @@ Page {
     ColumnLayout {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-
         anchors.horizontalCenter: parent.horizontalCenter
 
+        width: Math.max(0, Math.min(parent.width - 40, 800))
+
         anchors.margins: 20
-
-        width: Math.min(parent.width - 40, 800)
-
         spacing: 10
 
         TextField {
             id: titleField
+            text: root.initialTitle
             placeholderText: qsTr("Заголовок")
             font.pixelSize: 18
             font.bold: true
@@ -58,17 +66,18 @@ Page {
         }
 
         ScrollView {
+            id: view
             Layout.fillWidth: true
             Layout.fillHeight: true
 
             TextArea {
                 id: contentArea
-                placeholderText: qsTr("Текст заметки (Markdown)...")
+                text: root.initialContent
+                placeholderText: qsTr("Текст заметки...")
                 font.pixelSize: 16
                 wrapMode: TextEdit.Wrap
                 textFormat: TextEdit.PlainText
-
-                width: parent.width
+                width: view.availableWidth
             }
         }
     }
