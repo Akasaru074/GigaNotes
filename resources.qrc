@@ -2,5 +2,7 @@
     <qresource prefix="/icons"/>
     <qresource prefix="/">
         <file>resources/qml/Main.qml</file>
+        <file>resources/qml/NoteListPage.qml</file>
+        <file>resources/qml/NoteEditorPage.qml</file>
     </qresource>
 </RCC>
