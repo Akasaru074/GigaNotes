@@ -8,6 +8,7 @@ Page {
     property string noteTitle: ""
     property string noteContent: ""
     property string noteDate: ""
+    property int noteId: -1
 
     title: qsTr("Просмотр")
 
@@ -22,6 +23,16 @@ Page {
                 text: root.title
                 Layout.fillWidth: true
                 horizontalAlignment: Qt.AlignHCenter
+            }
+            ToolButton {
+                text: "Edit"
+                onClicked: {
+                    stackView.push("NoteEditorPage.qml", {
+                        noteId: root.noteId,
+                        initialTitle: root.noteTitle,
+                        initialContent: root.noteContent
+                    })
+                }
             }
             Item { width: 40 }
         }

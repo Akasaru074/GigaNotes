@@ -35,6 +35,7 @@ public:
 
     bool addNote(Note& note);
     bool removeNote(int id);
+    bool updateNote(const Note& note);
     std::vector<Note> getAllNotes();
 
 private:

@@ -95,6 +95,22 @@ bool DatabaseManager::addNote(Note& note)
     return false;
 }
 
+bool DatabaseManager::updateNote(const Note& note)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE notes SET title = :title, content = :content WHERE id = :id");
+    query.bindValue(":title", note.title);
+    query.bindValue(":content", note.content);
+    query.bindValue(":id", note.id);
+
+    if (query.exec()) {
+        return true;
+    }
+
+    qCritical() << "Failed to update note:" << query.lastError().text();
+    return false;
+}
+
 bool DatabaseManager::removeNote(int id)
 {
     QSqlQuery query;
