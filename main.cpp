@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QQuickStyle>
 #include "database/databasemanager.h"
 #include "models/notesmodel.h"
 
@@ -11,6 +12,8 @@ int main(int argc, char *argv[])
     if (!DatabaseManager::instance().connect()) {
         qFatal("Could not connect to database!");
     }
+
+    QQuickStyle::setStyle("Material");
 
     QQmlApplicationEngine engine;
 

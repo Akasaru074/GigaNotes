@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Quick Sql)
+find_package(Qt6 REQUIRED COMPONENTS Core Quick Sql QuickControls2)
 
 qt_standard_project_setup(REQUIRES 6.8)
 
@@ -22,6 +22,8 @@ qt_add_qml_module(appGigaNotes
     VERSION 1.0
     QML_FILES
         resources/qml/Main.qml
+        resources/qml/NoteEditorPage.qml
+        resources/qml/NoteListPage.qml
         SOURCES database/databasemanager.h database/databasemanager.cpp
         SOURCES models/notesmodel.h models/notesmodel.cpp
         SOURCES entities/Note.h
@@ -43,6 +45,7 @@ target_link_libraries(appGigaNotes PRIVATE
     Qt6::Core
     Qt6::Quick
     Qt6::Sql
+    Qt6::QuickControls2
 )
 
 include(GNUInstallDirs)

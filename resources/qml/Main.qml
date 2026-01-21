@@ -1,8 +1,17 @@
-import QtQuick 2.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-Window {
-    width: 640
-    height: 480
+ApplicationWindow {
+    id: window
+    width: 400
+    height: 700
     visible: true
-    title: qsTr("Hello world")
+    title: qsTr("Giga Notes")
+
+    StackView {
+        id: stackView
+        anchors.fill: parent
+        initialItem: NoteListPage {}
+    }
 }
