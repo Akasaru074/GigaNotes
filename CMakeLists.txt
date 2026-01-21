@@ -17,6 +17,10 @@ qt_add_qml_module(appGigaNotes
     VERSION 1.0
     QML_FILES
         Main.qml
+        SOURCES database/databasemanager.h database/databasemanager.cpp
+        SOURCES models/notesmodel.h models/notesmodel.cpp
+        SOURCES entities/Note.h
+        RESOURCES resources.qrc
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -30,8 +34,8 @@ set_target_properties(appGigaNotes PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(appGigaNotes
-    PRIVATE Qt6::Quick
+target_link_libraries(appGigaNotes PRIVATE
+    Qt6::Quick
 )
 
 include(GNUInstallDirs)
