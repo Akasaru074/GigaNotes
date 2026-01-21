@@ -40,7 +40,9 @@ set_target_properties(appGigaNotes PROPERTIES
 )
 
 target_link_libraries(appGigaNotes PRIVATE
+    Qt6::Core
     Qt6::Quick
+    Qt6::Sql
 )
 
 include(GNUInstallDirs)
