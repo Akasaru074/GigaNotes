@@ -4,7 +4,12 @@ import QtQuick.Layouts
 
 Page {
     id: root
-    title: qsTr("Новая заметка")
+
+    property string noteTitle: ""
+    property string noteContent: ""
+    property string noteDate: ""
+
+    title: qsTr("Просмотр")
 
     header: ToolBar {
         RowLayout {
@@ -18,37 +23,35 @@ Page {
                 Layout.fillWidth: true
                 horizontalAlignment: Qt.AlignHCenter
             }
-            ToolButton {
-                text: "Save"
-                enabled: titleField.text.length > 0
-                onClicked: {
-                    notesModel.addNote(titleField.text, contentArea.text)
-                    stackView.pop()
-                }
-            }
+            Item { width: 40 }
         }
     }
 
     ColumnLayout {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-
         anchors.horizontalCenter: parent.horizontalCenter
-
+        width: Math.min(parent.width - 40, 800)
+        spacing: 20
         anchors.margins: 20
 
-        width: Math.min(parent.width - 40, 800)
-
-        spacing: 10
-
-        TextField {
-            id: titleField
-            placeholderText: qsTr("Заголовок")
-            font.pixelSize: 18
-            font.bold: true
-
+        ColumnLayout {
             Layout.fillWidth: true
-            background: null
+            spacing: 5
+
+            Label {
+                text: root.noteTitle
+                font.pixelSize: 24
+                font.bold: true
+                wrapMode: Text.Wrap
+                Layout.fillWidth: true
+            }
+
+            Label {
+                text: root.noteDate
+                font.pixelSize: 14
+                color: "gray"
+            }
         }
 
         Rectangle {
@@ -62,13 +65,13 @@ Page {
             Layout.fillHeight: true
 
             TextArea {
-                id: contentArea
-                placeholderText: qsTr("Текст заметки (Markdown)...")
-                font.pixelSize: 16
+                text: root.noteContent
+                readOnly: true
+                textFormat: TextEdit.MarkdownText
                 wrapMode: TextEdit.Wrap
-                textFormat: TextEdit.PlainText
+                font.pixelSize: 16
 
-                width: parent.width
+                background: null
             }
         }
     }

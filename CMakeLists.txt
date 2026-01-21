@@ -24,6 +24,7 @@ qt_add_qml_module(appGigaNotes
         resources/qml/Main.qml
         resources/qml/NoteEditorPage.qml
         resources/qml/NoteListPage.qml
+        resources/qml/NoteViewPage.qml
         SOURCES database/databasemanager.h database/databasemanager.cpp
         SOURCES models/notesmodel.h models/notesmodel.cpp
         SOURCES entities/Note.h

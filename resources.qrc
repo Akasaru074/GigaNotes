@@ -4,5 +4,6 @@
         <file>resources/qml/Main.qml</file>
         <file>resources/qml/NoteListPage.qml</file>
         <file>resources/qml/NoteEditorPage.qml</file>
+        <file>resources/qml/NoteViewPage.qml</file>
     </qresource>
 </RCC>
