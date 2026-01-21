@@ -4,6 +4,9 @@
 #include <QString>
 #include <QDateTime>
 
+/**
+ * @brief Структура, представляющая одну заметку.
+ */
 struct Note {
     int id = -1;
     QString title;
