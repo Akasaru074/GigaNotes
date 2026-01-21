@@ -2,9 +2,14 @@ cmake_minimum_required(VERSION 3.16)
 
 project(GigaNotes VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+find_package(Qt6 REQUIRED COMPONENTS Core Quick Sql)
 
 qt_standard_project_setup(REQUIRES 6.8)
 
@@ -16,7 +21,7 @@ qt_add_qml_module(appGigaNotes
     URI GigaNotes
     VERSION 1.0
     QML_FILES
-        Main.qml
+        resources/qml/Main.qml
         SOURCES database/databasemanager.h database/databasemanager.cpp
         SOURCES models/notesmodel.h models/notesmodel.cpp
         SOURCES entities/Note.h
